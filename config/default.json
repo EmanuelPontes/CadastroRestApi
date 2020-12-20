@@ -1,0 +1,15 @@
+{
+    "server": {
+        "port": 8080
+    },
+    "database": {
+        "url": "mongodb://127.0.0.1:27017",
+        "options": {
+            "dbname": "enrollUser",
+            "useNewUrlParser": true,
+            "poolSize": 10,
+            "autoIndex": false,
+            "family": 4
+        }
+    }
+}
