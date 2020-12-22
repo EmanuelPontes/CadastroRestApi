@@ -12,6 +12,7 @@ app.set("view engine", "ejs");
 
 //configurar statics
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public/stylesheets")));
 
 //configurar middlewares
 app.use(express.urlencoded({extended: true}));
