@@ -20,11 +20,12 @@
     </grid-header>
     <main-content>
         <form-content>
-            <form class="pt-3" action="http://localhost:8080/formcadastro" method="POST" id="formCadastro">
+            <form class="pt-3" action="http://localhost:8080/cadastro" method="POST" id="formCadastro">
                 <div class="form-group row">
                     <label for="nome">Nome Completo: </label>
-                    <input type="text" name="nome" class="form-control" id="nome" require>
+                    <input type="text" name="pessoa[nome]" class="form-control" id="nome" require>
                 </div>
+
                 <div class="form-group row" >
                     <label for="pessoaTipo"> Identificação: </label>
                     <select name="pessoaTipo" class="form-control" id="pessoaTipo" require>
@@ -35,20 +36,22 @@
 
                 <div class="form-group row" id="razaoSocialForm" style="display: none;"> 
                     <label for="razaoSocial">Razão Social: </label>
-                    <input type="text" name="razaoSocial" class="form-control" id="razaoSocial" require>
+                    <input type="text" name="pessoaJuridica[razaoSocial]" class="form-control" id="razaoSocial" require>
+                </div>
+
+                <div class="form-group row" id="cnpjForm" style="display: none;">
+                    <label for="cnpj">CNPJ: </label>
+                    <input type="text" name="pessoaJuridica[cnpj]" class="form-control" id="cnpj" require>
                 </div>
 
                 <div class="form-group row" id="cpfForm" style="display: block;">
                     <label for="cpf">CPF: </label>
-                    <input type="text" name="cpf" class="form-control" id="cpf" require>
+                    <input type="text" name="pessoaFisica[cpf]" class="form-control" id="cpf" require>
                 </div>
-                <div class="form-group row" id="cnpjForm" style="display: none;">
-                    <label for="cnpj">CNPJ: </label>
-                    <input type="text" name="cnpj" class="form-control" id="cnpj" require>
-                </div>
+               
                 <div class="form-group row" id="generoForm" style="display: block;">
                     <label for="genero"> Genero: </label>
-                    <select name="genero" class="form-control" id="genero" require>
+                    <select name="pessoaFisica[genero]" class="form-control" id="genero" require>
                         <option value="1">Masculino</option>
                         <option value="2">Feminino</option>
                         <option value="3">Outro</option>
@@ -56,23 +59,23 @@
                 </div>
                 <div class="form-group row" id="dataNascForm" style="display: block;">  
                     <label for="dataNascimento">Data de Nascimento:  </label>
-                    <input type="date" name="dataNascimento" id="dataNascimento" require>
+                    <input type="date" name="pessoaFisica[dataNascimento]" id="dataNascimento" require>
                 </div>
                 <div class="form-group row">
                     <label for="email">E-MAIL: </label>
-                    <input type="email" name="email" class="form-control" id="email">
+                    <input type="email" name="pessoa[email]" class="form-control" id="email">
                 </div>
                 <div class="form-group row">
                     <label for="tel">Telefone: </label>
-                    <input type="tel" name="telefone" class="form-control" id="tel">
+                    <input type="tel" name="pessoa[telefone]" class="form-control" id="tel">
                 </div>
                 <div class="form-group row">
                     <label for="tel">Celular: </label>
-                    <input type="tel" name="celular" class="form-control" id="cel">
+                    <input type="tel" name="pessoa[celular]" class="form-control" id="cel">
                 </div>
                 <div class="form-group row">
-                    <label for="foto">Foto: </label>
-                    <input type="url" name="foto" placeholder="Inserir URL" class="form-control" id="foto">
+                    <label for="fotoUrl">Foto: </label>
+                    <input type="url" name="pessoa[fotoUrl]" placeholder="Inserir URL" class="form-control" id="fotoUrl">
                 </div>
                 
                 <div class="form-group row card">
@@ -89,33 +92,32 @@
                         <div class="form-group row">
                             <div class="form-group col">
                                 <label for="logradouro">Logradouro: </label>
-                                <input type="text" name="logradouro" placeholder="Rua, Av, etc." class="form-control" id="logradouro">
+                                <input type="text" name="enderecos[][logradouro]" placeholder="Rua, Av, etc." class="form-control" id="logradouro">
                             </div>
                             <div class="form-group col">
                                 <label for="numero">Número:  </label>
-                                <input type="text" name="numero" class="form-control" id="numero">
+                                <input type="text" name="enderecos[][numero]" class="form-control" id="numero">
                             </div>
                             <div class="form-group col">
                                 <label for="complemento">Complemento:  </label>
-                                <input type="text" name="complemento" class="form-control" id="complemento">
+                                <input type="text" name="enderecos[][complemento]" class="form-control" id="complemento">
                             </div>
                         </div>
                 
                         <div class="form-group row">
                             <div class="form-group col">
                                 <label for="cep">CEP:  </label>
-                                <input type="text" name="cep" class="form-control" id="cep">
+                                <input type="text" name="enderecos[][cep]" class="form-control" id="cep">
                             </div>
                             <div class="form-group col">
                                 <label for="estado"> Estado: </label>
-                                <select name="estado" class="form-control" id="estado" require>
-                                    <option value="1">PR</option>
+                                <select name="enderecos[][estado]" class="form-control" id="estado" require>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col">
                                 <label for="cidade"> Cidade: </label>
-                                <select name="cidade" class="form-control" id="cidade" require>
-                                    <option value="1">Curitiba</option>
+                                <select name="enderecos[][cidade]" class="form-control" id="cidade" require>
                                 </select>
                             </div>
                             
@@ -167,14 +169,14 @@
                         $('#formCadastro').submit(function() {
                             $('#formCadastro').preventDefault();
                             var formArray = $('#formCadastro').serializeArray();
-                            var formObj = {};
-
+                            
                             $.map(formArray, function(obj, index){
+
                                 formObj[obj['name']] = obj['value'];
                             });
 
                             $.ajax({
-                                url: "http://localhost:8080/formcadastro",
+                                url: "http://localhost:8080/cadastro",
                                 type: 'post',
                                 contentType:"application/json; charset=utf-8",
                                 data: JSON.stringify(formObj)
@@ -182,6 +184,43 @@
                         });
                         
                     });
+                </script>
+
+                <script>
+
+
+                    function loadJSON(callback) {
+
+                        var xobj = new XMLHttpRequest();
+                        xobj.overrideMimeType("application/json");
+                        xobj.open('GET', 'http://localhost:8080/estadosCidade.json', true);
+                        xobj.onreadystatechange = function() {
+                            if (xobj.readyState == 4 && xobj.status == "200") {
+
+                                // .open will NOT return a value but simply returns undefined in async mode so use a callback
+                                callback(xobj.responseText);
+
+                            }
+                        }
+
+                        xobj.send(null);
+
+                    }
+
+                    loadJSON( function(response) {
+                        // Do Something with the response e.g.
+                        var estadoQuery = document.querySelector("#estado");
+                        var listEstadosCidades = response;
+                        console.log(response);
+                        for(let estado of listEstadosCidades) {
+                            var estadoSigla = document.createElement('option');
+                            estadoSigla.setAttribute('value',estado.sigla)
+                            estadoSigla.innerHTML = estado.sigla;
+                            estadoQuery.append(estadoSigla);
+                        }
+                    });
+
+                      
                 </script>
                 
             </form>

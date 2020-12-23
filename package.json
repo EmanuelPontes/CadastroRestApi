@@ -7,6 +7,8 @@
     "CadastroRestApi": "server.js"
   },
   "scripts": {
+    "start": "pm2 start bin/server.js",
+    "stop":  "pm2 stop bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
