@@ -47,11 +47,11 @@ module.exports = app => {
                 pessoaDto = Object.assign(pessoaDto, {enderecos: enderecosArr});
 
                 dbUtil.save(pessoaDto, PessoaModel).then((pessoaId) => {
-                    var pessoaTipoDadosDto = (pessoaTipoDto === "pessoaJuridica") ? pessoaJuridicaDto : pessoaFisicaDto;
+                    var pessoaTipoDadosDto = (pessoaTipoDto === "pj") ? pessoaJuridicaDto : pessoaFisicaDto;
                             
                     pessoaTipoDadosDto = Object.assign(pessoaTipoDadosDto, {pessoaDados: pessoaId});
                             
-                    pessoaTipoModel = (pessoaTipoDto === "pessoaJuridica") ? PessoaJuridica : PessoaFisica;
+                    pessoaTipoModel = (pessoaTipoDto === "pj") ? PessoaJuridica : PessoaFisica;
                     
                     dbUtil.save(pessoaTipoDadosDto, pessoaTipoModel).then((pessoaTipoId) => {
                         res.status(200).send();

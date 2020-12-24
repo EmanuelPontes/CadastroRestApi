@@ -34,6 +34,7 @@ var database = db.CreateConnection();
 
 database.then( 
     () => {
+        var config = require('config'); 
         var dbUrl = config.get("database.url");
         var dbName = config.get("database.options.dbname");
         console.log("connected to " + dbUrl + "/" + dbName);

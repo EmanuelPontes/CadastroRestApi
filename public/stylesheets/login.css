@@ -7,30 +7,46 @@ body {
 
 ::-webkit-input-placeholder {
     text-align: center;
+    justify-items: center;
+    align-items: center;
     font-size: 2rem;
+    width: 100%;
  }
  
  :-moz-placeholder { /* Firefox 18- */
     text-align: center;
-    font-size: 2rem;  
+    justify-items: center;
+    align-items: center;
+    font-size: 2rem; 
+    width: 100%;
  }
  
  ::-moz-placeholder {  /* Firefox 19+ */
     text-align: center;
+    justify-items: center;
+    align-items: center;
     font-size: 2rem;  
+    width: 100%;
  }
  
  :-ms-input-placeholder {  
     text-align: center;
+    justify-items: center;
+    align-items: center;
     font-size: 2rem; 
+    width: 100%;
  }
 
 .card-grid{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 8fr 1fr;
     grid-template-rows: repeat(3, 1fr);
 }
 .card-header {
+    background-color: #296049!important;
+}
+
+.card-footer {
     background-color: #296049!important;
 }
 .card {

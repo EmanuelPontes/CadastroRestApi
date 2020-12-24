@@ -10,6 +10,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="formToObj.js"></script>
+    <script src="formCadastro.js"></script>
     <title>Formulário cadastro</title>
 </head>
 <body>
@@ -20,62 +22,62 @@
     </grid-header>
     <main-content>
         <form-content>
-            <form class="pt-3" action="http://localhost:8080/cadastro" method="POST" id="formCadastro">
+            <form class="pt-3" method="POST" id="formCadastro">
                 <div class="form-group row">
                     <label for="nome">Nome Completo: </label>
-                    <input type="text" name="pessoa[nome]" class="form-control" id="nome" require>
+                    <input type="text" name="pessoa.nome" class="form-control" id="nome" require>
                 </div>
 
                 <div class="form-group row" >
                     <label for="pessoaTipo"> Identificação: </label>
                     <select name="pessoaTipo" class="form-control" id="pessoaTipo" require>
-                        <option value="1">Pessoa Física</option>
-                        <option value="2">Pessoa Jurídica</option>
+                        <option value="pf">Pessoa Física</option>
+                        <option value="pj">Pessoa Jurídica</option>
                     </select>
                 </div>
 
                 <div class="form-group row" id="razaoSocialForm" style="display: none;"> 
                     <label for="razaoSocial">Razão Social: </label>
-                    <input type="text" name="pessoaJuridica[razaoSocial]" class="form-control" id="razaoSocial" require>
+                    <input type="text" name="pessoaJuridica.razaoSocial" class="form-control" id="razaoSocial" require>
                 </div>
 
                 <div class="form-group row" id="cnpjForm" style="display: none;">
                     <label for="cnpj">CNPJ: </label>
-                    <input type="text" name="pessoaJuridica[cnpj]" class="form-control" id="cnpj" require>
+                    <input type="text" name="pessoaJuridica.cnpj" class="form-control" id="cnpj" require>
                 </div>
 
                 <div class="form-group row" id="cpfForm" style="display: block;">
                     <label for="cpf">CPF: </label>
-                    <input type="text" name="pessoaFisica[cpf]" class="form-control" id="cpf" require>
+                    <input type="text" name="pessoaFisica.cpf" class="form-control" id="cpf" require>
                 </div>
                
                 <div class="form-group row" id="generoForm" style="display: block;">
-                    <label for="genero"> Genero: </label>
-                    <select name="pessoaFisica[genero]" class="form-control" id="genero" require>
-                        <option value="1">Masculino</option>
-                        <option value="2">Feminino</option>
-                        <option value="3">Outro</option>
+                    <label for="genero"> Gênero: </label>
+                    <select name="pessoaFisica.genero" class="form-control" id="genero" require>
+                        <option value="Masc">Masculino</option>
+                        <option value="Fem">Feminino</option>
+                        <option value="Other">Outro</option>
                     </select>
                 </div>
                 <div class="form-group row" id="dataNascForm" style="display: block;">  
                     <label for="dataNascimento">Data de Nascimento:  </label>
-                    <input type="date" name="pessoaFisica[dataNascimento]" id="dataNascimento" require>
+                    <input type="date" name="pessoaFisica.dataNascimento" class="form-control" id="dataNascimento" require>
                 </div>
                 <div class="form-group row">
                     <label for="email">E-MAIL: </label>
-                    <input type="email" name="pessoa[email]" class="form-control" id="email">
+                    <input type="email" name="pessoa.email" class="form-control" id="email">
                 </div>
                 <div class="form-group row">
                     <label for="tel">Telefone: </label>
-                    <input type="tel" name="pessoa[telefone]" class="form-control" id="tel">
+                    <input type="tel" name="pessoa.telefone" class="form-control" id="tel">
                 </div>
                 <div class="form-group row">
                     <label for="tel">Celular: </label>
-                    <input type="tel" name="pessoa[celular]" class="form-control" id="cel">
+                    <input type="tel" name="pessoa.celular" class="form-control" id="cel">
                 </div>
                 <div class="form-group row">
                     <label for="fotoUrl">Foto: </label>
-                    <input type="url" name="pessoa[fotoUrl]" placeholder="Inserir URL" class="form-control" id="fotoUrl">
+                    <input type="url" name="pessoa.fotoUrl" placeholder="Inserir URL" class="form-control" id="fotoUrl">
                 </div>
                 
                 <div class="form-group row card">
@@ -85,46 +87,93 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="card-title">
-                            Endereço 1:
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="form-group col">
-                                <label for="logradouro">Logradouro: </label>
-                                <input type="text" name="enderecos[][logradouro]" placeholder="Rua, Av, etc." class="form-control" id="logradouro">
-                            </div>
-                            <div class="form-group col">
-                                <label for="numero">Número:  </label>
-                                <input type="text" name="enderecos[][numero]" class="form-control" id="numero">
-                            </div>
-                            <div class="form-group col">
-                                <label for="complemento">Complemento:  </label>
-                                <input type="text" name="enderecos[][complemento]" class="form-control" id="complemento">
-                            </div>
-                        </div>
-                
-                        <div class="form-group row">
-                            <div class="form-group col">
-                                <label for="cep">CEP:  </label>
-                                <input type="text" name="enderecos[][cep]" class="form-control" id="cep">
-                            </div>
-                            <div class="form-group col">
-                                <label for="estado"> Estado: </label>
-                                <select name="enderecos[][estado]" class="form-control" id="estado" require>
-                                    
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label for="cidade"> Cidade: </label>
-                                <select name="enderecos[][cidade]" class="form-control" id="cidade" require>
-                                </select>
-                            </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="card-title">
+                                            Endereço 1:
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="form-group col-sm-10">
+                                            <label for="logradouro">Logradouro: </label>
+                                            <input type="text" name="enderecos[0].logradouro" placeholder="Rua, Av, etc." class="form-control" id="logradouro">
+                                        </div>
+                                        <div class="form-group col-sm-1">
+                                            <label for="numero">Número:  </label>
+                                            <input type="text" name="enderecos[0].numero" class="form-control" id="numero">
+                                        </div>
+                                        <div class="form-group col-sm-1">
+                                            <label for="complemento">Complemento:  </label>
+                                            <input type="text" name="enderecos[0].complemento" class="form-control" id="complemento">
+                                        </div>
+                                    </div>
                             
-                        </div>
-    
-                        <div class="row py-3">
-                            <button class="btn btn-secondary">Adicionar Novo Endereço</button>
+                                    <div class="form-group row">
+                                        <div class="form-group col-sm-2">
+                                            <label for="cep">CEP:  </label>
+                                            <input type="text" name="enderecos[0].cep" class="form-control" id="cep">
+                                        </div>
+                                        <div class="form-group col-sm-1">
+                                            <label for="estado"> Estado: </label>
+                                            <select name="enderecos[0].estado" class="form-control" id="estado" require>
+                                                
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="cidade"> Cidade: </label>
+                                            <select name="enderecos[0].cidade" class="form-control" id="cidade" require>
+                                            </select>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="card-title">
+                                            Endereço 2:
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="form-group col-sm-10">
+                                            <label for="logradouro">Logradouro: </label>
+                                            <input type="text" name="enderecos[1].logradouro" placeholder="Rua, Av, etc." class="form-control" id="logradouro">
+                                        </div>
+                                        <div class="form-group col-sm-1">
+                                            <label for="numero">Número:  </label>
+                                            <input type="text" name="enderecos[1].numero" class="form-control" id="numero">
+                                        </div>
+                                        <div class="form-group col-sm-1">
+                                            <label for="complemento">Complemento:  </label>
+                                            <input type="text" name="enderecos[1].complemento" class="form-control" id="complemento">
+                                        </div>
+                                    </div>
+                            
+                                    <div class="form-group row">
+                                        <div class="form-group col-sm-2">
+                                            <label for="cep">CEP:  </label>
+                                            <input type="text" name="enderecos[1].cep" class="form-control" id="cep">
+                                        </div>
+                                        <div class="form-group col-sm-1">
+                                            <label for="estado"> Estado: </label>
+                                            <select name="enderecos[1].estado" class="form-control" id="estado" require>
+                                                
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="cidade"> Cidade: </label>
+                                            <select name="enderecos[1].cidade" class="form-control" id="cidade" require>
+                                            </select>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
     
@@ -135,97 +184,12 @@
                     <button class="btn btn-secondary btn-large btn-block"> Enviar Formulário</button>
                 </div>
                 
-                <script>
-                    function onIdentificacaoChange() {
-                        console.log(document.getElementById("pessoaTipo").value);
-
-                        if (document.getElementById("pessoaTipo").value == 2) {
-                            
-                            document.getElementById("cpfForm").style.display = "none";
-                            document.getElementById("dataNascForm").style.display = "none";
-                            document.getElementById("generoForm").style.display = "none";
-                            document.getElementById("cnpjForm").style.display = "block";
-                            document.getElementById("razaoSocialForm").style.display = "block";
-                        } else {
-                            document.getElementById("cpfForm").style.display = "block";
-                            document.getElementById("dataNascForm").style.display = "block";
-                            document.getElementById("generoForm").style.display = "block";
-                            document.getElementById("cnpjForm").style.display = "none";
-                            document.getElementById("razaoSocialForm").style.display = "none";
-                        }
-                    }
-
-                    document.getElementById("pessoaTipo").addEventListener("change", onIdentificacaoChange);
-                    
-                    $('#cpf').mask('000.000.000-00');
-                    $('#cnpj').mask('00.000.000/0000-00');
-                    $('#tel').mask('(00) 00000-0000');
-                    $('#cel').mask('(00) 00000-0000');
-                </script>
-
-                <script>
-                    $(document).ready(()=> {
-                        
-                        $('#formCadastro').submit(function() {
-                            $('#formCadastro').preventDefault();
-                            var formArray = $('#formCadastro').serializeArray();
-                            
-                            $.map(formArray, function(obj, index){
-
-                                formObj[obj['name']] = obj['value'];
-                            });
-
-                            $.ajax({
-                                url: "http://localhost:8080/cadastro",
-                                type: 'post',
-                                contentType:"application/json; charset=utf-8",
-                                data: JSON.stringify(formObj)
-                            });
-                        });
-                        
-                    });
-                </script>
-
-                <script>
-
-
-                    function loadJSON(callback) {
-
-                        var xobj = new XMLHttpRequest();
-                        xobj.overrideMimeType("application/json");
-                        xobj.open('GET', 'http://localhost:8080/estadosCidade.json', true);
-                        xobj.onreadystatechange = function() {
-                            if (xobj.readyState == 4 && xobj.status == "200") {
-
-                                // .open will NOT return a value but simply returns undefined in async mode so use a callback
-                                callback(xobj.responseText);
-
-                            }
-                        }
-
-                        xobj.send(null);
-
-                    }
-
-                    loadJSON( function(response) {
-                        // Do Something with the response e.g.
-                        var estadoQuery = document.querySelector("#estado");
-                        var listEstadosCidades = response;
-                        console.log(response);
-                        for(let estado of listEstadosCidades) {
-                            var estadoSigla = document.createElement('option');
-                            estadoSigla.setAttribute('value',estado.sigla)
-                            estadoSigla.innerHTML = estado.sigla;
-                            estadoQuery.append(estadoSigla);
-                        }
-                    });
-
-                      
-                </script>
+               
                 
             </form>
         </form-content>     
     </main-content>
+    <br>
     <grid-footer>
         <span class="text-white text-center">
            <small>
@@ -234,4 +198,31 @@
         </span>
     </grid-footer>    
 </body>
+
+<script>
+    //Jquery scripts
+    $('#cpf').mask('000.000.000-00');
+    $('#cnpj').mask('00.000.000/0000-00');
+    $('#tel').mask('(00) 00000-0000');
+    $('#cel').mask('(00) 00000-0000');
+    $('#cep').mask('00000-000');
+
+    $(document).ready(()=> {
+        console.log("envio formulario");
+        $('#formCadastro').submit(function(event) {
+            event.preventDefault();
+            var formArray = $('#formCadastro').serializeArray();
+            
+            var formObj = formToObj(formArray);
+            $.ajax({
+                url: "http://localhost:8080/cadastro",
+                type: 'post',
+                contentType:"application/json; charset=utf-8",
+                data: JSON.stringify(formObj)
+            });
+        });
+        
+    });
+
+</script>
 </html>

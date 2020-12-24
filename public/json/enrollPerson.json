@@ -1,0 +1,30 @@
+{   
+    "pessoaTipo": "",
+    "pessoaFisica": {
+        "cpf": "",
+        "genero": "",
+        "dataNascimento": "mm/dd/yyyy"
+    },
+    "pessoaJuridica": {
+        "cnpj": "",
+        "razaoSocial": ""    
+    },
+    "pessoa": {
+        "nome": "",
+        "email": "",
+        "telefone": "",
+        "celular": "",
+        "fotoUrl": ""
+    },
+    "enderecos": [
+        {
+            "logradouro": "",
+            "numero": "",
+            "complemento": "",
+            "bairro": "",
+            "cidade": "",
+            "estado": "",
+            "cep": ""
+        }
+    ]
+}
