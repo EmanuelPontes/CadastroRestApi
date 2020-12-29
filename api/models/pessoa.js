@@ -4,8 +4,14 @@ module.exports = app => {
 
     var pessoaSchema = new Schema(
         {
-            nome: String,
-            email: String,
+            nome: {
+                type: String,
+                required: true
+            },
+            email: {
+                type: String,
+                required: true
+            },
             telefone: String,
             celular: String,
             fotoUrl: String,

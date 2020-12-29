@@ -4,9 +4,20 @@ module.exports = app => {
         
     var pessoaFisicaSchema = new Schema(
         {
-            cpf: String,
-            genero: String,
-            dataNascimento: Date,
+            cpf: {
+                type: String,
+                required: true,
+                maxLength: 14,
+                minLength: 14,
+            },
+            genero: {
+                type: String,
+                required: true
+            },
+            dataNascimento: {
+                type: Date,
+                required: true
+            },
             pessoaDados: { type: Schema.Types.ObjectId, ref: 'Pessoa' },
         }
     );

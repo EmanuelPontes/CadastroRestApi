@@ -4,8 +4,16 @@ module.exports = app => {
         
     var pessoaJuridicaSchema = new Schema(
         {
-            cnpj: String,
-            razaoSocial: String,
+            cnpj: {
+                type: String,
+                required: true,
+                maxLength: 15,
+                minLength: 15,
+            },
+            razaoSocial:  {
+                type: String,
+                required: true
+            },
             pessoaDados: { type: Schema.Types.ObjectId, ref: 'Pessoa' },
         }
     );

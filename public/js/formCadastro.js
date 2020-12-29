@@ -21,33 +21,33 @@ window.addEventListener('load',() => {
         
     }
     
-    
-    
     loadJSON().then((response) => {
         var listEstadosCidades = {};
         // Do Something with the response e.g.
-        var estadoQuery = document.querySelector("#estado");
+        var estado0Query = document.querySelector("#estado0");
+    
         var estadoSiglaBranco = document.createElement('option');
         estadoSiglaBranco.setAttribute('value','');
         estadoSiglaBranco.innerHTML = '';
-        estadoQuery.append(estadoSiglaBranco);
+        estado0Query.append(estadoSiglaBranco);
         var listEstadosCidades = JSON.parse(response);
         for(let estado of listEstadosCidades.estados) {
             var estadoSigla = document.createElement('option');
             estadoSigla.setAttribute('value',estado.sigla);
             estadoSigla.innerHTML = estado.sigla;
-            estadoQuery.append(estadoSigla);
+            estado0Query.append(estadoSigla);
         }
         
         return listEstadosCidades;
     }).then(
         (listEstadosCidades) => {
-            document.querySelector("#estado").addEventListener("change", function () {
-                var sigla = document.querySelector("#estado").value;
+
+            document.querySelector("#estado0").addEventListener("change", function () {
+                var sigla = document.querySelector("#estado0").value;
     
                 for(let estado of listEstadosCidades.estados) {
                     if (sigla == estado.sigla) {
-                        cidadeQuery = document.querySelector("#cidade");
+                        cidadeQuery = document.querySelector("#cidade0");
                         cidadeQuery.innerHTML = '';
                         for (let cidade of estado.cidades) {
                             var cidadeNome = document.createElement('option');
@@ -59,24 +59,75 @@ window.addEventListener('load',() => {
                     }
                 }
             });
-        });
+
+    });
+    
+    loadJSON().then((response) => {
+        var listEstadosCidades = {};
+        // Do Something with the response e.g.
+        var estado0Query = document.querySelector("#estado1");
+    
+        var estadoSiglaBranco = document.createElement('option');
+        estadoSiglaBranco.setAttribute('value','');
+        estadoSiglaBranco.innerHTML = '';
+        estado0Query.append(estadoSiglaBranco);
+        var listEstadosCidades = JSON.parse(response);
+        for(let estado of listEstadosCidades.estados) {
+            var estadoSigla = document.createElement('option');
+            estadoSigla.setAttribute('value',estado.sigla);
+            estadoSigla.innerHTML = estado.sigla;
+            estado0Query.append(estadoSigla);
+        }
+        
+        return listEstadosCidades;
+    }).then(
+        (listEstadosCidades) => {
+
+            document.querySelector("#estado1").addEventListener("change", function () {
+                var sigla = document.querySelector("#estado1").value;
+    
+                for(let estado of listEstadosCidades.estados) {
+                    if (sigla == estado.sigla) {
+                        cidadeQuery = document.querySelector("#cidade1");
+                        cidadeQuery.innerHTML = '';
+                        for (let cidade of estado.cidades) {
+                            var cidadeNome = document.createElement('option');
+                            cidadeNome.setAttribute('value',cidade)
+                            cidadeNome.innerHTML = cidade;
+                            cidadeQuery.append(cidadeNome);
+                        }
+                        
+                    }
+                }
+            });
+
+    });
 
     function onIdentificacaoChange() {
         console.log(document.getElementById("pessoaTipo").value);
     
-        if (document.getElementById("pessoaTipo").value == 2) {
+        if (document.getElementById("pessoaTipo").value == "pj") {
             
             document.getElementById("cpfForm").style.display = "none";
             document.getElementById("dataNascForm").style.display = "none";
             document.getElementById("generoForm").style.display = "none";
+
+            document.getElementById("cpf").required = false;
+            document.getElementById("dataNasc").required = false;
+            document.getElementById("genero").required = false;
+
             document.getElementById("cnpjForm").style.display = "block";
             document.getElementById("razaoSocialForm").style.display = "block";
         } else {
             document.getElementById("cpfForm").style.display = "block";
             document.getElementById("dataNascForm").style.display = "block";
             document.getElementById("generoForm").style.display = "block";
+
             document.getElementById("cnpjForm").style.display = "none";
             document.getElementById("razaoSocialForm").style.display = "none";
+
+            document.getElementById("cnpj").required = false;
+            document.getElementById("razaoSocial").required = false;
         }
     }
     

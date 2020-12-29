@@ -4,13 +4,27 @@ module.exports = app => {
         
     var enderecoSchema = new Schema(
         {
-            logradouro: String,
-            numero: String,
-            complemento: String,
-            bairro: String,
-            cidade: String,
-            estado: String,
-            cep: String
+            logradouro: {
+                type: String,
+            },
+            numero: {
+                type: String,
+            },
+            complemento: {
+                type: String,
+            },
+            bairro: {
+                type: String,
+            },
+            cidade: {
+                type: String,
+            },
+            estado: {
+                type: String,
+            },
+            cep: {
+                type: String,
+            },
         }
     );
         

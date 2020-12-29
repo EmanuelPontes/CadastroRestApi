@@ -15,6 +15,7 @@
     <title>Formulário cadastro</title>
 </head>
 <body>
+    
     <grid-header>
         <h1 class="text-white text-center">
             Formulário de Cadastro
@@ -25,12 +26,13 @@
             <form class="pt-3" method="POST" id="formCadastro">
                 <div class="form-group row">
                     <label for="nome">Nome Completo: </label>
-                    <input type="text" name="pessoa.nome" class="form-control" id="nome" require>
+                    <input type="text" name="pessoa.nome" class="form-control" id="nome" required>
                 </div>
 
                 <div class="form-group row" >
                     <label for="pessoaTipo"> Identificação: </label>
-                    <select name="pessoaTipo" class="form-control" id="pessoaTipo" require>
+                    <select name="pessoaTipo" class="form-control" id="pessoaTipo" required>
+                        <option value=""></option>
                         <option value="pf">Pessoa Física</option>
                         <option value="pj">Pessoa Jurídica</option>
                     </select>
@@ -38,22 +40,22 @@
 
                 <div class="form-group row" id="razaoSocialForm" style="display: none;"> 
                     <label for="razaoSocial">Razão Social: </label>
-                    <input type="text" name="pessoaJuridica.razaoSocial" class="form-control" id="razaoSocial" require>
+                    <input type="text" name="pessoaJuridica.razaoSocial" class="form-control" id="razaoSocial" required>
                 </div>
 
                 <div class="form-group row" id="cnpjForm" style="display: none;">
                     <label for="cnpj">CNPJ: </label>
-                    <input type="text" name="pessoaJuridica.cnpj" class="form-control" id="cnpj" require>
+                    <input type="text" name="pessoaJuridica.cnpj" class="form-control" id="cnpj" required>
                 </div>
 
                 <div class="form-group row" id="cpfForm" style="display: block;">
                     <label for="cpf">CPF: </label>
-                    <input type="text" name="pessoaFisica.cpf" class="form-control" id="cpf" require>
+                    <input type="text" name="pessoaFisica.cpf" class="form-control" id="cpf" required>
                 </div>
                
                 <div class="form-group row" id="generoForm" style="display: block;">
                     <label for="genero"> Gênero: </label>
-                    <select name="pessoaFisica.genero" class="form-control" id="genero" require>
+                    <select name="pessoaFisica.genero" class="form-control" id="genero" required>
                         <option value="Masc">Masculino</option>
                         <option value="Fem">Feminino</option>
                         <option value="Other">Outro</option>
@@ -61,7 +63,7 @@
                 </div>
                 <div class="form-group row" id="dataNascForm" style="display: block;">  
                     <label for="dataNascimento">Data de Nascimento:  </label>
-                    <input type="date" name="pessoaFisica.dataNascimento" class="form-control" id="dataNascimento" require>
+                    <input type="date" name="pessoaFisica.dataNascimento" class="form-control" id="dataNasc" required>
                 </div>
                 <div class="form-group row">
                     <label for="email">E-MAIL: </label>
@@ -99,11 +101,11 @@
                                     <div class="form-group row">
                                         <div class="form-group col-sm-10">
                                             <label for="logradouro">Logradouro: </label>
-                                            <input type="text" name="enderecos[0].logradouro" placeholder="Rua, Av, etc." class="form-control" id="logradouro">
+                                            <input type="text" name="enderecos[0].logradouro" placeholder="Rua, Av, etc." class="form-control" id="logradouro" required>
                                         </div>
                                         <div class="form-group col-sm-1">
                                             <label for="numero">Número:  </label>
-                                            <input type="text" name="enderecos[0].numero" class="form-control" id="numero">
+                                            <input type="text" name="enderecos[0].numero" class="form-control" id="numero" required>
                                         </div>
                                         <div class="form-group col-sm-1">
                                             <label for="complemento">Complemento:  </label>
@@ -114,18 +116,22 @@
                                     <div class="form-group row">
                                         <div class="form-group col-sm-2">
                                             <label for="cep">CEP:  </label>
-                                            <input type="text" name="enderecos[0].cep" class="form-control" id="cep">
+                                            <input type="text" name="enderecos[0].cep" class="form-control" id="cep" required>
                                         </div>
                                         <div class="form-group col-sm-1">
                                             <label for="estado"> Estado: </label>
-                                            <select name="enderecos[0].estado" class="form-control" id="estado" require>
+                                            <select name="enderecos[0].estado" class="form-control" id="estado0" required>
                                                 
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-sm-3">
                                             <label for="cidade"> Cidade: </label>
-                                            <select name="enderecos[0].cidade" class="form-control" id="cidade" require>
+                                            <select name="enderecos[0].cidade" class="form-control" id="cidade0" required>
                                             </select>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label for="bairro"> Bairro: </label>
+                                            <input type="text" name="enderecos[0].bairro" class="form-control" id="bairro0">
                                         </div>
                                         
                                     </div>
@@ -161,14 +167,18 @@
                                         </div>
                                         <div class="form-group col-sm-1">
                                             <label for="estado"> Estado: </label>
-                                            <select name="enderecos[1].estado" class="form-control" id="estado" require>
+                                            <select name="enderecos[1].estado" class="form-control" id="estado1">
                                                 
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-4">
+                                        <div class="form-group col-sm-3">
                                             <label for="cidade"> Cidade: </label>
-                                            <select name="enderecos[1].cidade" class="form-control" id="cidade" require>
+                                            <select name="enderecos[1].cidade" class="form-control" id="cidade1">
                                             </select>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label for="bairro"> Bairro: </label>
+                                            <input type="text" name="enderecos[1].bairro" class="form-control" id="bairro1">
                                         </div>
                                         
                                     </div>
@@ -214,12 +224,21 @@
             var formArray = $('#formCadastro').serializeArray();
             
             var formObj = formToObj(formArray);
-            $.ajax({
+            var jqXHR = $.ajax({
                 url: "http://localhost:8080/cadastro",
                 type: 'post',
                 contentType:"application/json; charset=utf-8",
-                data: JSON.stringify(formObj)
+                data: JSON.stringify(formObj),
             });
+
+            jqXHR.done(function() {
+                alert("Cadastro realizado com sucesso");
+            });
+
+            jqXHR.fail(function() {
+                alert("Falha ao salvar cadastro, favor verificar os campos");
+            });
+
         });
         
     });

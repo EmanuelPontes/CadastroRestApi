@@ -57,14 +57,22 @@ module.exports = app => {
                         res.status(200).send();
                     }).catch(
                         (e) => {
+                            console.log("falha ao salvar pessoa tipo");
                             res.status(400).send();
                         }
                     );
                      
-                });
+                }).catch(
+                    (e) => {
+                        console.log("falha ao salvar pessoa");
+                        res.status(400).send();
+                    }
+                );
                 
             }).catch(
                 (e) => {
+                    console.log("falha ao salvar enderecos");
+                    console.log(e);
                     res.status(400).send();
                 }
             );;
