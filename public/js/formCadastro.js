@@ -116,6 +116,9 @@ window.addEventListener('load',() => {
             document.getElementById("dataNasc").required = false;
             document.getElementById("genero").required = false;
 
+            document.getElementById("cnpj").required = true;
+            document.getElementById("razaoSocial").required = true;
+
             document.getElementById("cnpjForm").style.display = "block";
             document.getElementById("razaoSocialForm").style.display = "block";
         } else {
@@ -128,6 +131,10 @@ window.addEventListener('load',() => {
 
             document.getElementById("cnpj").required = false;
             document.getElementById("razaoSocial").required = false;
+
+            document.getElementById("cpf").required = true;
+            document.getElementById("dataNasc").required = true;
+            document.getElementById("genero").required = true;
         }
     }
     
