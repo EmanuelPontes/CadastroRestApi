@@ -28,3 +28,8 @@ Criar web api com :
 Utilizar mongoDb para salvar os Cadastros realizados
 Estrutura do projeto será MVC(Model, view and controller)
 
+-todo:
+    Página para consulta e exclusão de registros
+    Definir processos de segurança
+
+
