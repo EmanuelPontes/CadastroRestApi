@@ -30,7 +30,7 @@ consign({cwd: 'api'})
   .into(app);
 
 //Conectar com a database
-//var database = db.CreateConnection();
+var database = db.CreateConnection();
 
 module.exports = app;
 

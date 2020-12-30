@@ -1,8 +1,8 @@
 var supertest = require('supertest');
-var app = require('../app');
+var app = require('./appTest');
 var request = supertest(app);
 
-test("Testing get enrolled user route and controller", async done => {
+test("Testing post and get enrolled user route and controller", async done => {
     const db = require('../database/db');
     await db.CreateConnection("testEnrollUserr");
     await db.Drop();

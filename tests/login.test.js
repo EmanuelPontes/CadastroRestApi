@@ -1,5 +1,5 @@
 var supertest = require('supertest');
-var app = require('../app');
+var app = require('./appTest');
 var request = supertest(app);
 
 

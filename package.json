@@ -7,7 +7,8 @@
     "CadastroRestApi": "server.js"
   },
   "scripts": {
-    "start": "pm2 start bin/server.js",
+    "start": "set NODE_ENV=development&& pm2 start bin/server.js",
+    "start-prod": "set NODE_ENV=production&& pm2 start bin/server.js",
     "stop": "pm2 stop bin/server.js",
     "test": "jest"
   },
@@ -35,5 +36,8 @@
   "devDependencies": {
     "jest": "^26.6.3",
     "supertest": "^6.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
