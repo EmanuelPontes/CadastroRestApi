@@ -6,6 +6,8 @@ module.exports = app => {
         {
             cpf: {
                 type: String,
+                unique:true,
+                dropDups: true, 
                 required: true,
                 maxLength: 14,
                 minLength: 14,

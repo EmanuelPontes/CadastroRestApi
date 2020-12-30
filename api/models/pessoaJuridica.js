@@ -6,6 +6,8 @@ module.exports = app => {
         {
             cnpj: {
                 type: String,
+                unique:true,
+                dropDups: true, 
                 required: true,
                 maxLength: 15,
                 minLength: 15,

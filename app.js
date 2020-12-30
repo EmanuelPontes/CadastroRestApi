@@ -30,17 +30,7 @@ consign({cwd: 'api'})
   .into(app);
 
 //Conectar com a database
-var database = db.CreateConnection();
+//var database = db.CreateConnection();
 
-database.then( 
-    () => {
-        var config = require('config'); 
-        var dbUrl = config.get("database.url");
-        var dbName = config.get("database.options.dbname");
-        console.log("connected to " + dbUrl + "/" + dbName);
-    },
-    (err) => {
-        console.log(err);
-    });
 module.exports = app;
 

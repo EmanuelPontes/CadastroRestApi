@@ -3,9 +3,10 @@
         "port": 8080
     },
     "database": {
-        "url": "mongodb://127.0.0.1:27017",
+        "dbName": "enrollUser",
+        "url": "mongodb://127.0.0.1:27017/",
         "options": {
-            "dbname": "enrollUser",
+            "useUnifiedTopology": true,
             "useNewUrlParser": true,
             "poolSize": 10,
             "autoIndex": false,

@@ -4,10 +4,14 @@ module.exports = app => {
         get: (req, res, next) => {
             var PessoaJuridica = app.models.pessoaJuridica;
             var PessoaFisica = app.models.pessoaFisica;
-
+            
             var pessoaTipoModel = (req.query.pessoaTipo === "pj") ? PessoaJuridica : PessoaFisica;
-
-            pessoaTipoModel.find({})
+            
+            var filterObj = {};
+            if(req.query.id != undefined) {
+                filterObj = (req.query.pessoaTipo === "pj") ? {cnpj: req.query.id} : {cpf: req.query.id};
+            }
+            pessoaTipoModel.find(filterObj)
             .select("-_id -__v")
             .populate({
                 path : 'pessoaDados',
@@ -20,7 +24,9 @@ module.exports = app => {
             .exec(function(err, obj) {
                 if (err) {
                     console.log(err);
+                    res.status(400).send();
                 } else {
+                    res.status(200);
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify(obj));
                 }
@@ -58,6 +64,7 @@ module.exports = app => {
                     }).catch(
                         (e) => {
                             console.log("falha ao salvar pessoa tipo");
+                            console.log(e);
                             res.status(400).send();
                         }
                     );
@@ -72,7 +79,6 @@ module.exports = app => {
             }).catch(
                 (e) => {
                     console.log("falha ao salvar enderecos");
-                    console.log(e);
                     res.status(400).send();
                 }
             );;
