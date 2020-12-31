@@ -112,15 +112,15 @@ window.addEventListener('load',() => {
             document.getElementById("dataNascForm").style.display = "none";
             document.getElementById("generoForm").style.display = "none";
 
-            document.getElementById("cpf").required = false;
-            document.getElementById("dataNasc").required = false;
-            document.getElementById("genero").required = false;
-
-            document.getElementById("cnpj").required = true;
-            document.getElementById("razaoSocial").required = true;
-
             document.getElementById("cnpjForm").style.display = "block";
             document.getElementById("razaoSocialForm").style.display = "block";
+
+            document.getElementById("cpf").removeAttribute("required");
+            document.getElementById("dataNasc").removeAttribute("required");
+            document.getElementById("genero").removeAttribute("required");
+
+            document.getElementById("cnpj").setAttribute("required", "");
+            document.getElementById("razaoSocial").setAttribute("required", "");
         } else {
             document.getElementById("cpfForm").style.display = "block";
             document.getElementById("dataNascForm").style.display = "block";
@@ -129,12 +129,12 @@ window.addEventListener('load',() => {
             document.getElementById("cnpjForm").style.display = "none";
             document.getElementById("razaoSocialForm").style.display = "none";
 
-            document.getElementById("cnpj").required = false;
-            document.getElementById("razaoSocial").required = false;
+            document.getElementById("cpf").setAttribute("required", "");
+            document.getElementById("dataNasc").setAttribute("required", "");
+            document.getElementById("genero").setAttribute("required", "");
 
-            document.getElementById("cpf").required = true;
-            document.getElementById("dataNasc").required = true;
-            document.getElementById("genero").required = true;
+            document.getElementById("cnpj").removeAttribute("required");
+            document.getElementById("razaoSocial").removeAttribute("required");
         }
     }
     

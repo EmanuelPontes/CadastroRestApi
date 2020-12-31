@@ -13,9 +13,16 @@ body {
    
 }
 
+.header-box {
+    max-width: 100rem;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    background-color: darkslategray!important;
+}
 grid-header{
+    padding-top: 2rem;
     grid-area: header;
-    background-color: darkslategray!important; 
 }
 
 
@@ -36,8 +43,13 @@ form-content {
 }
 
 grid-footer{
-    
+    padding-top: 2rem;
     grid-area:footer;
-    background-color: darkslategray!important; 
+    background-color: 296049!important; 
 }
 
+.footer-box {
+    max-width: 1000rem;
+    width: 100%;
+    background-color: darkslategray!important;
+}
