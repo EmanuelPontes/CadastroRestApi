@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="formCadastro.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="formToObj.js"></script>
+    <title>Inicio</title>
+</head>
+<body>
+    <grid-header>
+        <div class="header-box">
+            <h1 class="text-white text-center mb-0">
+                Início
+            </h1>
+        </div>
+    </grid-header>
+    <main-content>
+
+        <form-content>
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-lg-12" id="content">
+                        <div class="row">
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form id="getEnrolledUsersForm">
+                                    <div class="form-group row" >
+                                        <label for="consulta"> Buscar: </label>
+                                        <select name="consulta.tipo" class="form-control" id="consulta" required>
+                                            <option value="pf">Pessoa Física</option>
+                                            <option value="pj">Pessoa Jurídica</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group row" id="cnpjForm" style="display: none;">
+                                        <label for="cnpj">CNPJ: </label>
+                                        <input type="text" name="consulta.cnpj" class="form-control" id="cnpj">
+                                    </div>
+                    
+                                    <div class="form-group row" id="cpfForm" style="display: block;">
+                                        <label for="cpf">CPF: </label>
+                                        <input type="text" name="consulta.cpf" class="form-control" id="cpf">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="getEnrolledUsers">Consultar Usuário</button>
+                                </form>
+                               
+                            </div>
+                            <div class="col">
+                                <a href="http://localhost:8080/formcadastro" class="btn btn-success" id="enrollUser"> Cadastrar Usuário</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form-content>
+        
+    </main-content>
+    <grid-footer class="fixed-bottom">
+        <div class="footer-box">
+            <span class="text-white text-center pl-1">
+                <small>
+                    2020 ©EmanuelPontes - Formulário de cadastro
+                </small> 
+             </span>
+        </div>
+        
+    </grid-footer>  
+</body>
+
+<script>
+    $(document).ready( () => {
+        $('#cpf').mask('000.000.000-00');
+        $('#cnpj').mask('00.000.000/0000-00');
+
+        function onIdentificacaoChange() {
+            document.getElementById((document.getElementById("consulta").value == "pj") ? "cpfForm" : "cnpjForm").style.display = "none";
+
+            document.getElementById((document.getElementById("consulta").value == "pj") ? "cnpjForm" : "cpfForm").style.display = "block";
+            
+            document.getElementById((document.getElementById("consulta").value == "pj") ? "cnpj" : "cpf").innerHTML = "";
+        }
+    
+        document.getElementById("consulta").addEventListener("change", onIdentificacaoChange);
+
+        $('#getEnrolledUsersForm').submit(function(event) {
+            event.preventDefault();
+
+            var formArray = $('#getEnrolledUsersForm').serializeArray();
+            
+            var formObj = formToObj(formArray);
+
+            var objConsulta = {pessoaTipo: formObj.consulta.tipo};
+            
+            if ((formObj.consulta.cnpj != "") || (formObj.consulta.cpf != "")) {
+                
+                objConsulta['id'] = (formObj.consulta.tipo == "pj") ? formObj.consulta.cnpj : formObj.consulta.cpf;
+            }
+
+            var jqXHR = $.ajax({
+                url: "http://localhost:8080/cadastro",
+                type: 'get',
+                contentType:"application/json; charset=utf-8",
+                data: objConsulta
+            });
+
+            jqXHR.done(function(data) {
+                var divRow = document.createElement("div");
+                divRow.className = "row";
+                var ul = document.createElement("ul");
+                ul.style = "list-style-type: none;";
+                for (let obj of data) {
+                    var li = document.createElement("li");
+                    li.innerHTML = obj.pessoaDados.nome + " " + obj.pessoaDados.enderecos[0].cep;
+                    ul.appendChild(li);
+                }
+                divRow.appendChild(ul);
+                
+                $("#content").append(divRow);
+
+            });
+
+            jqXHR.fail(function() {
+                alert("Falha ao realizar consulta");
+            });
+
+        });
+        
+    });
+</script>
+</html>

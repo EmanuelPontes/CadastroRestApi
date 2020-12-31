@@ -5,9 +5,10 @@ module.exports = function(app) {
             console.log(userObj);
             if((userObj.user == "admin") && (userObj.password == "12345")) {
                 console.log("Usuario aprovado");
-                res.redirect('/formcadastro');
+                res.status(200).send('/formcadastro');
             } else {
-                console.log("Usuario reprovado;")
+                console.log("Usuario reprovado;");
+                res.status(401).send();
             }
         }
     };
