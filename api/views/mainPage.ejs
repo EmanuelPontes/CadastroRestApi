@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <script src="formToObj.js"></script>
+    <script src="htmlTableUtil.js"></script>
     <title>Inicio</title>
 </head>
 <body>
@@ -25,15 +26,20 @@
 
         <form-content>
             <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="true" href="#">Consultar</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="http://localhost:8080/formcadastro" aria-current="true" id="enrollUser" style="outline: none; text-decoration:none; color:black;">Cadastrar</a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="card-body">
                     <div class="col-lg-12" id="content">
                         <div class="row">
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                            </p>
-                        </div>
-                        <div class="row">
-                            <div class="col">
+                            <div class="col-sm-6">
                                 <form id="getEnrolledUsersForm">
                                     <div class="form-group row" >
                                         <label for="consulta"> Buscar: </label>
@@ -52,21 +58,24 @@
                                         <label for="cpf">CPF: </label>
                                         <input type="text" name="consulta.cpf" class="form-control" id="cpf">
                                     </div>
-                                    <button type="submit" class="btn btn-primary" id="getEnrolledUsers">Consultar Usuário</button>
+
+                                    <div class="form-group row">
+                                        <button type="submit" class="btn btn-primary" id="getEnrolledUsers">Consultar Usuário</button>
+                                    </div>
+                                   
                                 </form>
                                
                             </div>
-                            <div class="col">
-                                <a href="http://localhost:8080/formcadastro" class="btn btn-success" id="enrollUser"> Cadastrar Usuário</a>
-                            </div>
                         </div>
+                        <br>
                     </div>
                 </div>
             </div>
+            
         </form-content>
         
     </main-content>
-    <grid-footer class="fixed-bottom">
+    <grid-footer>
         <div class="footer-box">
             <span class="text-white text-center pl-1">
                 <small>
@@ -96,6 +105,8 @@
         $('#getEnrolledUsersForm').submit(function(event) {
             event.preventDefault();
 
+            $('div').remove('#resultGetUsers');
+
             var formArray = $('#getEnrolledUsersForm').serializeArray();
             
             var formObj = formToObj(formArray);
@@ -117,15 +128,39 @@
             jqXHR.done(function(data) {
                 var divRow = document.createElement("div");
                 divRow.className = "row";
-                var ul = document.createElement("ul");
-                ul.style = "list-style-type: none;";
-                for (let obj of data) {
-                    var li = document.createElement("li");
-                    li.innerHTML = obj.pessoaDados.nome + " " + obj.pessoaDados.enderecos[0].cep;
-                    ul.appendChild(li);
-                }
-                divRow.appendChild(ul);
+                divRow.id = "resultGetUsers";
+                var tableMatrix = [];
+
+                var lineHeader = ('cnpj' in data[0]) ? ["", "CNPJ", "Nome", "Email", "Celular"] : ["", "CPF", "Nome", "Email", "Celular"];
                 
+                tableMatrix.push(lineHeader);
+                
+                for (let obj of data) {
+                    var line = [];
+                    var objPessoa = obj.pessoaDados;
+                    
+                    for (key of tableMatrix[0]) {
+                        var lowerCaseKey = key.toLowerCase();
+                        if (key === "") {
+                            var imgStr = '<img src="' + objPessoa['fotoUrl'] + '" style="width: 100%; max-width: 5rem; height: auto" >';
+                            line.push(imgStr);
+                        }
+                        else if ((lowerCaseKey === "cpf") || (lowerCaseKey === "cnpj")) {
+                            line.push(obj[lowerCaseKey]);
+                        } else {
+                            line.push(objPessoa[lowerCaseKey]);
+                        }
+                        
+                        
+                    }
+                    tableMatrix.push(line);
+                }
+
+                var table = createTable(tableMatrix);
+                table.style = "width: 100%!important;";
+                table.className = "table table-sm table-bordered table-light";
+
+                divRow.appendChild(table);
                 $("#content").append(divRow);
 
             });

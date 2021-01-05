@@ -21,7 +21,7 @@
                 </h1>
             </div>
             <div class="card-body py-3">
-                <form  action="http://localhost:8080/auth" id="loginForm" method="post">
+                <form id="loginForm" method="POST">
                     <div class="text-center form-group row-6" >
                         <input class="border-0 rounded py-3" style="width: 100%;" type="text" placeholder="Usuário" name="user" class="form-control" id="user">    
                     </div>
@@ -51,8 +51,8 @@
 <script>
     $(document).ready(()=> {
         
-        $('#loginForm').submit(function() {
-            $('#loginForm').preventDefault();
+        $('#loginForm').submit(function(event) {
+            event.preventDefault();
             var formArray = $('#loginForm').serializeArray();
             var formObj = {};
 
@@ -60,11 +60,20 @@
                 formObj[obj['name']] = obj['value'];
             });
 
-            $.ajax({
+            var jqXHR = $.ajax({
                 url: "http://localhost:8080/auth",
                 type: 'post',
                 contentType:"application/json; charset=utf-8",
                 data: JSON.stringify(formObj)
+            });
+
+            jqXHR.done(function(data) {
+                alert("Sucesso");
+                window.location.href = data;
+            });
+
+            jqXHR.fail(function() {
+                alert("Falha na autencicação");
             });
         });
         
