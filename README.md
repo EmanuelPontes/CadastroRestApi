@@ -31,5 +31,6 @@ Estrutura do projeto será MVC(Model, view and controller)
 -todo:
     Exclusão de registros
     Definir processos de segurança
+    Corrigir a tabela de exibição da consulta adaptado para mobile.
 
 
