@@ -1,0 +1,209 @@
+<script src="formCadastro.js"></script>
+<form class="pt-3" method="POST" id="formCadastro">
+    <div class="form-group row">
+        <label for="nome">Nome Completo: </label>
+        <input type="text" name="pessoa.nome" class="form-control" id="nome" required>
+    </div>
+
+    <div class="form-group row" >
+        <label for="pessoaTipo"> Identificação: </label>
+        <select name="pessoaTipo" class="form-control" id="pessoaTipo" required>
+            <option value="pf">Pessoa Física</option>
+            <option value="pj">Pessoa Jurídica</option>
+        </select>
+    </div>
+
+    <div class="form-group row" id="razaoSocialForm" style="display: none;"> 
+        <label for="razaoSocial">Razão Social: </label>
+        <input type="text" name="pessoaJuridica.razaoSocial" class="form-control" id="razaoSocial">
+    </div>
+
+    <div class="form-group row" id="cnpjForm" style="display: none;">
+        <label for="cnpj">CNPJ: </label>
+        <input type="text" name="pessoaJuridica.cnpj" class="form-control" id="cnpj">
+    </div>
+
+    <div class="form-group row" id="cpfForm" style="display: block;">
+        <label for="cpf">CPF: </label>
+        <input type="text" name="pessoaFisica.cpf" class="form-control" id="cpf" required>
+    </div>
+   
+    <div class="form-group row" id="generoForm" style="display: block;">
+        <label for="genero"> Gênero: </label>
+        <select name="pessoaFisica.genero" class="form-control" id="genero" required>
+            <option value="Masc">Masculino</option>
+            <option value="Fem">Feminino</option>
+            <option value="Other">Outro</option>
+        </select>
+    </div>
+    <div class="form-group row" id="dataNascForm" style="display: block;">  
+        <label for="dataNascimento">Data de Nascimento:  </label>
+        <input type="date" name="pessoaFisica.dataNascimento" class="form-control" id="dataNasc" required>
+    </div>
+    <div class="form-group row">
+        <label for="email">E-MAIL: </label>
+        <input type="email" name="pessoa.email" class="form-control" id="email">
+    </div>
+    <div class="form-group row">
+        <label for="tel">Telefone: </label>
+        <input type="tel" name="pessoa.telefone" class="form-control" id="tel">
+    </div>
+    <div class="form-group row">
+        <label for="tel">Celular: </label>
+        <input type="tel" name="pessoa.celular" class="form-control" id="cel">
+    </div>
+    <div class="form-group row">
+        <label for="fotoUrl">Foto: </label>
+        <input type="url" name="pessoa.fotoUrl" placeholder="Inserir URL" class="form-control" id="fotoUrl">
+    </div>
+    
+    <div class="form-group row card ">
+        <div class="card-header">
+            <div class="card-title">
+                Endereços
+            </div>
+        </div>
+        <div class="card-body text-left ">
+            
+            <div class="col-lg-12 ">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="card-title">
+                                Endereço 1:
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="form-group col-sm-6">
+                                <label for="logradouro">Logradouro: </label>
+                                <input type="text" name="enderecos[0].logradouro" placeholder="Rua, Av, etc." class="form-control" id="logradouro" required>
+                            </div>
+                            <div class="form-group col-sm-1">
+                                <label for="numero">Número:  </label>
+                                <input type="text" name="enderecos[0].numero" class="form-control" id="numero" required>
+                            </div>
+                            <div class="form-group col-sm-1">
+                                <label for="complemento">Complemento:  </label>
+                                <input type="text" name="enderecos[0].complemento" class="form-control" id="complemento">
+                            </div>
+                        </div>
+                
+                        <div class="form-group row">
+                            <div class="form-group col-sm-2">
+                                <label for="cep">CEP:  </label>
+                                <input type="text" name="enderecos[0].cep" class="form-control" id="cep" required>
+                            </div>
+                            <div class="form-group col-sm-1">
+                                <label for="estado"> Estado: </label>
+                                <select name="enderecos[0].estado" class="form-control" id="estado0" required>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="cidade"> Cidade: </label>
+                                <select name="enderecos[0].cidade" class="form-control" id="cidade0" required>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="bairro"> Bairro: </label>
+                                <input type="text" name="enderecos[0].bairro" class="form-control" id="bairro0">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="card-title">
+                                Endereço 2:
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="form-group col-sm-6">
+                                <label for="logradouro">Logradouro: </label>
+                                <input type="text" name="enderecos[1].logradouro" placeholder="Rua, Av, etc." class="form-control" id="logradouro">
+                            </div>
+                            <div class="form-group col-sm-1">
+                                <label for="numero">Número:  </label>
+                                <input type="text" name="enderecos[1].numero" class="form-control" id="numero">
+                            </div>
+                            <div class="form-group col-sm-1">
+                                <label for="complemento">Complemento:  </label>
+                                <input type="text" name="enderecos[1].complemento" class="form-control" id="complemento">
+                            </div>
+                        </div>
+                
+                        <div class="form-group row">
+                            <div class="form-group col-sm-2">
+                                <label for="cep">CEP:  </label>
+                                <input type="text" name="enderecos[1].cep" class="form-control" id="cep">
+                            </div>
+                            <div class="form-group col-sm-1">
+                                <label for="estado"> Estado: </label>
+                                <select name="enderecos[1].estado" class="form-control" id="estado1">
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="cidade"> Cidade: </label>
+                                <select name="enderecos[1].cidade" class="form-control" id="cidade1">
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="bairro"> Bairro: </label>
+                                <input type="text" name="enderecos[1].bairro" class="form-control" id="bairro1">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row py-3 px-0">
+        <button class="btn btn-secondary btn-large btn-block"> Enviar Formulário</button>
+    </div>
+    
+   
+    
+</form>
+<script>
+    //Jquery scripts
+    $('#cpf').mask('000.000.000-00');
+    $('#cnpj').mask('00.000.000/0000-00');
+    $('#tel').mask('(00) 00000-0000');
+    $('#cel').mask('(00) 00000-0000');
+    $('#cep').mask('00000-000');
+
+    $(document).ready(()=> {
+        console.log("envio formulario");
+        $('#formCadastro').submit(function(event) {
+            event.preventDefault();
+            var formArray = $('#formCadastro').serializeArray();
+            
+            var formObj = formToObj(formArray);
+            var jqXHR = $.ajax({
+                url: "http://localhost:8080/cadastro",
+                type: 'post',
+                contentType:"application/json; charset=utf-8",
+                data: JSON.stringify(formObj),
+            });
+
+            jqXHR.done(function() {
+                alert("Cadastro realizado com sucesso");
+            });
+
+            jqXHR.fail(function() {
+                alert("Falha ao salvar cadastro, favor verificar os campos");
+            });
+
+        });
+        
+    });
+
+</script>

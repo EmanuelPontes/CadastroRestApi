@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fonts-awesome-free-5.15.1/css/all.css">
     <link rel="stylesheet" href="formCadastro.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -12,67 +13,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <script src="formToObj.js"></script>
     <script src="htmlTableUtil.js"></script>
+    <script src="fonts-awesome-free-5.15.1/js/all.js"></script>
     <title>Inicio</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
     <grid-header>
         <div class="header-box">
-            <h1 class="text-white text-center mb-0">
-                Início
-            </h1>
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-white text-left mb-0 ">
+                        <i class="fas fa-home"></i> Início
+                    </h1>
+                </div>
+                <div class="col">
+                    <h5 class="text-white text-right mb-0 pt-4">Registro e Consulta de Usuários</h5>
+                </div>
+            </div>
+            
         </div>
     </grid-header>
     <main-content>
 
-        <form-content>
-            <div class="card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" aria-current="true" href="#">Consultar</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="http://localhost:8080/formcadastro" aria-current="true" id="enrollUser" style="outline: none; text-decoration:none; color:black;">Cadastrar</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="col-lg-12" id="content">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <form id="getEnrolledUsersForm">
-                                    <div class="form-group row" >
-                                        <label for="consulta"> Buscar: </label>
-                                        <select name="consulta.tipo" class="form-control" id="consulta" required>
-                                            <option value="pf">Pessoa Física</option>
-                                            <option value="pj">Pessoa Jurídica</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group row" id="cnpjForm" style="display: none;">
-                                        <label for="cnpj">CNPJ: </label>
-                                        <input type="text" name="consulta.cnpj" class="form-control" id="cnpj">
-                                    </div>
-                    
-                                    <div class="form-group row" id="cpfForm" style="display: block;">
-                                        <label for="cpf">CPF: </label>
-                                        <input type="text" name="consulta.cpf" class="form-control" id="cpf">
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <button type="submit" class="btn btn-primary" id="getEnrolledUsers">Consultar Usuário</button>
-                                    </div>
-                                   
-                                </form>
-                               
-                            </div>
-                        </div>
-                        <br>
-                    </div>
+        <div class="card  bg-light px-0 py-0">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link <%= get %>" href="http://localhost:8080/main" aria-current="true" href="#"> <i class="fas fa-search"></i> Consultar</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link <%= post %>" href="http://localhost:8080/formcadastro" aria-current="true" id="enrollUser"> <i class="fas fa-user-plus"></i> Cadastrar</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="col-lg-12" id="content">
+                    <%- include(page) %>
                 </div>
             </div>
-            
-        </form-content>
+        </div>
         
     </main-content>
     <grid-footer>
@@ -86,91 +65,4 @@
         
     </grid-footer>  
 </body>
-
-<script>
-    $(document).ready( () => {
-        $('#cpf').mask('000.000.000-00');
-        $('#cnpj').mask('00.000.000/0000-00');
-
-        function onIdentificacaoChange() {
-            document.getElementById((document.getElementById("consulta").value == "pj") ? "cpfForm" : "cnpjForm").style.display = "none";
-
-            document.getElementById((document.getElementById("consulta").value == "pj") ? "cnpjForm" : "cpfForm").style.display = "block";
-            
-            document.getElementById((document.getElementById("consulta").value == "pj") ? "cnpj" : "cpf").innerHTML = "";
-        }
-    
-        document.getElementById("consulta").addEventListener("change", onIdentificacaoChange);
-
-        $('#getEnrolledUsersForm').submit(function(event) {
-            event.preventDefault();
-
-            $('div').remove('#resultGetUsers');
-
-            var formArray = $('#getEnrolledUsersForm').serializeArray();
-            
-            var formObj = formToObj(formArray);
-
-            var objConsulta = {pessoaTipo: formObj.consulta.tipo};
-            
-            if ((formObj.consulta.cnpj != "") || (formObj.consulta.cpf != "")) {
-                
-                objConsulta['id'] = (formObj.consulta.tipo == "pj") ? formObj.consulta.cnpj : formObj.consulta.cpf;
-            }
-
-            var jqXHR = $.ajax({
-                url: "http://localhost:8080/cadastro",
-                type: 'get',
-                contentType:"application/json; charset=utf-8",
-                data: objConsulta
-            });
-
-            jqXHR.done(function(data) {
-                var divRow = document.createElement("div");
-                divRow.className = "row";
-                divRow.id = "resultGetUsers";
-                var tableMatrix = [];
-
-                var lineHeader = ('cnpj' in data[0]) ? ["", "CNPJ", "Nome", "Email", "Celular"] : ["", "CPF", "Nome", "Email", "Celular"];
-                
-                tableMatrix.push(lineHeader);
-                
-                for (let obj of data) {
-                    var line = [];
-                    var objPessoa = obj.pessoaDados;
-                    
-                    for (key of tableMatrix[0]) {
-                        var lowerCaseKey = key.toLowerCase();
-                        if (key === "") {
-                            var imgStr = '<img src="' + objPessoa['fotoUrl'] + '" style="width: 100%; max-width: 5rem; height: auto" >';
-                            line.push(imgStr);
-                        }
-                        else if ((lowerCaseKey === "cpf") || (lowerCaseKey === "cnpj")) {
-                            line.push(obj[lowerCaseKey]);
-                        } else {
-                            line.push(objPessoa[lowerCaseKey]);
-                        }
-                        
-                        
-                    }
-                    tableMatrix.push(line);
-                }
-
-                var table = createTable(tableMatrix);
-                table.style = "width: 100%!important;";
-                table.className = "table table-sm table-bordered table-light";
-
-                divRow.appendChild(table);
-                $("#content").append(divRow);
-
-            });
-
-            jqXHR.fail(function() {
-                alert("Falha ao realizar consulta");
-            });
-
-        });
-        
-    });
-</script>
 </html>

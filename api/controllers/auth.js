@@ -5,7 +5,7 @@ module.exports = function(app) {
             console.log(userObj);
             if((userObj.user == "admin") && (userObj.password == "12345")) {
                 console.log("Usuario aprovado");
-                res.status(200).send('/formcadastro');
+                res.status(200).send('/main');
             } else {
                 console.log("Usuario reprovado;");
                 res.status(401).send();

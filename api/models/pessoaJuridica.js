@@ -9,8 +9,8 @@ module.exports = app => {
                 unique:true,
                 dropDups: true, 
                 required: true,
-                maxLength: 15,
-                minLength: 15,
+                maxLength: 18,
+                minLength: 18,
             },
             razaoSocial:  {
                 type: String,

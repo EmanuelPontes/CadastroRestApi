@@ -24,11 +24,11 @@ function createTableHeader(tableObj, keyList) {
         tHeader.innerHTML = key;
         headerRow.appendChild(tHeader);
     }
-    tableObj.appendChild(headerRow);
+    tableObj.tBodies[0].appendChild(headerRow);
 }
 
 function insertTableValues(tableObj, valueList) {
-    var row = tableObj.insertRow(-1);
+    var row = tableObj.tBodies[0].insertRow(-1);
     for (let value of valueList) {
         var cell = row.insertCell(-1);
         cell.innerHTML = value;
