@@ -1,7 +1,7 @@
 CadastroRestApi
 
 Criar web api com :
-    -autenticação (usuario: admin,  senha:  12345)
+    -autenticação (mediante registro)
     - formulario de cadastro com os seguinte itens: 
 
         (*) Itens obrigatórios
@@ -32,5 +32,7 @@ Estrutura do projeto será MVC(Model, view and controller)
     Exclusão de registros
     Definir processos de segurança
     Corrigir a tabela de exibição da consulta adaptado para mobile.
+    Criar refresh de jwt tokens a medida que eles expiram
+    Salvar senhar como hash utilizando o bcrypto
 
 
