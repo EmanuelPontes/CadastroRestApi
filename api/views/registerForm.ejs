@@ -1,0 +1,52 @@
+<form id="registerForm" method="POST">
+    <div class="text-center form-group row-6" >
+        <input class="border-0 rounded py-3" style="width: 100%;" type="text" placeholder="Nome de Usuário" name="user" class="form-control" id="user">    
+    </div>
+    <div class="text-center form-group row-6" >
+        <input class="border-0 rounded py-3" style="width: 100%;" type="email" placeholder="Endereço de email" name="email" class="form-control" id="email">    
+    </div>
+    <div class="text-center form-group row-6" >
+        <input class="border-0 rounded py-3" style="width: 100%;" type="password" placeholder="Nova Senha" name="password" class="form-control" id="password">
+    </div>
+    <div class="text-center form-group row-6" >
+        <input class="border-0 rounded py-3" style="width: 100%;" type="password" placeholder="Confirmar Senha" name="confirmPassword" class="form-control" id="confirmPassword">
+    </div>
+    <div class="text-center py-1">
+        <button class="btn btn-secondary btn-large btn-block" type="submit">Registrar</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(()=> {
+        
+        $('#registerForm').submit(function(event) {
+            event.preventDefault();
+            var formArray = $('#registerForm').serializeArray();
+            var formObj = {};
+
+            $.map(formArray, function(obj, index){
+                formObj[obj['name']] = obj['value'];
+            });
+
+            var jqXHRPost = $.ajax({
+                    url: "/register",
+                    type: 'post',
+                    contentType:"application/json; charset=utf-8",
+                    data: JSON.stringify(formObj)
+            });
+
+            jqXHRPost.done(function(data) {
+                alert("Sucesso");
+                window.location.href = data;
+            });
+
+            jqXHRPost.fail(function() {
+                alert("Falha ao realizar cadastro de usuario");
+            });
+
+
+            
+        });
+        
+    });
+</script>

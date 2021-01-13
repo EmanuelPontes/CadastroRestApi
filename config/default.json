@@ -1,6 +1,9 @@
 {
     "server": {
-        "port": 8080
+        "port": 3000
+    },
+    "jwt": {
+        "secret": "364aba675151243a1e105cee426271f843bd1bdd7ab822291fce8b8455d7c6e4"
     },
     "database": {
         "dbName": "enrollUser",

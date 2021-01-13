@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, "public/stylesheets/fonts-awesome-fr
 app.use(express.static(path.join(__dirname, "public/json")));
 app.use(express.static(path.join(__dirname, "public/js")));
 app.use(express.static(path.join(__dirname, "public/js/fonts-awesome-free-5.15.1/")));
+
 app.use(express.static(path.join(__dirname, 'public','images')));
 
 //configurar middlewares
@@ -27,6 +28,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+app.locals.sessionTokens = [];
 
 //utilizar consig para autoload
 consign({cwd: 'api'})

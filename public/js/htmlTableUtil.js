@@ -4,6 +4,7 @@
  */
 function createTable(tableMatrix) {
     var table = document.createElement("table");
+
     var headerCreated = false;
     for (let line of tableMatrix) {
         if (headerCreated == false) {

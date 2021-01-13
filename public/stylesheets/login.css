@@ -37,6 +37,12 @@ body {
     width: 100%;
  }
 
+a {
+    outline: none!important; 
+    text-decoration:none!important;
+    color:white!important;
+}
+
 .card-grid{
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;

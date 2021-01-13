@@ -1,6 +1,6 @@
 <form id="getEnrolledUsersForm">
     <div class="form-group row" >
-        <label for="consulta"> Buscar: </label>
+        <label class="text-white" for="consulta"> Buscar: </label>
         <select name="consulta.tipo" class="form-control" id="consulta" required>
             <option value="pf">Pessoa Física</option>
             <option value="pj">Pessoa Jurídica</option>
@@ -8,12 +8,12 @@
     </div>
 
     <div class="form-group row" id="cnpjForm" style="display: none;">
-        <label for="cnpj">CNPJ: </label>
+        <label class="text-white" for="cnpj">CNPJ: </label>
         <input type="text" name="consulta.cnpj" class="form-control" id="cnpj">
     </div>
 
     <div class="form-group row" id="cpfForm" style="display: block;">
-        <label for="cpf">CPF: </label>
+        <label class="text-white" for="cpf">CPF: </label>
         <input type="text" name="consulta.cpf" class="form-control" id="cpf">
     </div>
 
@@ -54,15 +54,16 @@
             }
 
             var jqXHR = $.ajax({
-                url: "http://localhost:8080/cadastro",
+                url: "/cadastro",
                 type: 'get',
+                headers: { "Authorization": 'Bearer ' + localStorage.getItem('authToken') },
                 contentType:"application/json; charset=utf-8",
                 data: objConsulta
             });
 
             jqXHR.done(function(data) {
                 var divRow = document.createElement("div");
-                divRow.className = "table-responsive-sm";
+                divRow.className = "table-responsive-sm px-0 py-0";
                 divRow.id = "resultGetUsers";
                 var tableMatrix = [];
 
@@ -93,7 +94,7 @@
 
                 var table = createTable(tableMatrix);
                 table.style = "width: 100%!important;";
-                table.className = "table table-sm table-bordered table-light";
+                table.className = "table table-sm border-0 text-white table-hover bg-page-default";
 
                 divRow.appendChild(table);
                 $("#content").append(divRow);
