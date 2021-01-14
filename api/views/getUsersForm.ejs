@@ -101,8 +101,13 @@
 
             });
 
-            jqXHR.fail(function() {
-                alert("Falha ao realizar consulta");
+            jqXHR.fail(function(data) {
+                if(data != "") {
+                    alert(data);
+                } else {
+                    alert("Falha ao realizar consulta");
+                }
+                
             });
 
         });

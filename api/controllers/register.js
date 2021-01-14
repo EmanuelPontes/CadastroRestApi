@@ -14,7 +14,7 @@ module.exports = app => {
                 var hashCost = 12;
                 dataObj.password = bcrypt.hashSync(dataObj.password, hashCost);
             } else {
-                res.status(400).send();
+                res.status(400).send("Senhas diferentes, tente novamente");
                 return;
             }
 
@@ -30,7 +30,7 @@ module.exports = app => {
                 (e) => {
                     console.log("falha ao salvar novo usuario");
                     console.log(e);
-                    res.status(400).send();
+                    res.status(400).send("Falha ao cadastrar novo usuario, tente novamente");
                 }
             );
         }

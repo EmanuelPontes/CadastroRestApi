@@ -1,8 +1,14 @@
+const jwt = require('jsonwebtoken');
+const config = require('config');
 module.exports = app => {
 
     var controllerFormCadastro = {
         getPage: function(req, res, next) {
-            res.render('mainPage', {page: 'postUsersForm', get: "", post: "active", icon: "fa-user-plus", iconLabel: "Cadastrar"});
+            var jwtCookie = req.cookies["authUser"];
+            const jwtSecret = config.get("jwt.secret");
+            var decodedJWT = jwt.verify(jwtCookie, jwtSecret);
+
+            res.render('mainPage', {page: 'postUsersForm', admin: decodedJWT.username, get: "", post: "active", icon: "fa-user-plus", iconLabel: "Cadastrar"});
         },
     }
 
