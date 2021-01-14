@@ -1,3 +1,7 @@
+const cripto = require('crypto');
+const config = require('config');
+const jwt = require('jsonwebtoken');
+
 module.exports = (app) => {
 
     var authUtil = {
@@ -12,7 +16,7 @@ module.exports = (app) => {
 
                 if(Object.keys(rsaObj)[0] == publicKey) {
                     var privateKey = rsaObj[publicKey];
-                    const cripto = require('crypto');
+                    
                     const decryptedData = cripto.privateDecrypt(
                         {
                             key: privateKey,
@@ -35,8 +39,6 @@ module.exports = (app) => {
         },
 
         generateRsaKeyPair: function() {
-            const cripto = require('crypto');
-
             const { publicKey, privateKey } = cripto.generateKeyPairSync("rsa", {
                 modulusLength: 4096,
                 publicKeyEncoding: {
@@ -61,10 +63,7 @@ module.exports = (app) => {
 
             const token = req.cookies['authToken'];
 
-            if (token) {
-                const config = require('config');
-                const jwt = require('jsonwebtoken');
-                
+            if (token) {         
                 const jwtSecret = config.get("jwt.secret");
                 console.log("jwt token verificando");
                 jwt.verify(token, jwtSecret, (err, user) => {

@@ -1,3 +1,7 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+
 module.exports = function(app) {
     var controllerAuth = {
         validate: function(req, res, next) {
@@ -8,19 +12,20 @@ module.exports = function(app) {
             var userModel = app.models.user;
             var dbUtil = app.lib.dbUtil;
 
+            console.log("usuario recebido");
+            console.log(userObj);
             dbUtil.find({user: userObj.user}, userModel).then(
                 (foundUserArr) => {
                     var userAuth = false;
                     for(foundUserObj of foundUserArr) {
-                        userAuth = (userObj.password == foundUserObj.password) ? true : false;
+
+                        userAuth = bcrypt.compareSync(userObj.password, foundUserObj.password);
+
                         if (userAuth) {
                             break;
                         }
                     }
                     if(userAuth) {
-
-                        const jwt = require('jsonwebtoken');
-                        const config = require('config');
         
                         const jwtSecret = config.get("jwt.secret");
         
@@ -42,6 +47,7 @@ module.exports = function(app) {
                 }
             ).catch((e) => {
                 console.log("Falha ao realizar busca");
+                console.log(e);
                 res.status(500).send();
             });
 

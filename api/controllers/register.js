@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = app => {
 
     var controllerRegister = {
@@ -5,7 +7,17 @@ module.exports = app => {
             res.render('loginPage', {presentation:"Cadastre-se",form: "registerForm", request:"/", requestIcon:"fa-user" ,requestName: "Fazer Login"});
         },
         post: function(req, res, next) {
+
             var dataObj = req.body;
+
+            if (dataObj.password === dataObj.confirmPassword) {
+                var hashCost = 12;
+                dataObj.password = bcrypt.hashSync(dataObj.password, hashCost);
+            } else {
+                res.status(400).send();
+                return;
+            }
+
             var userModel = app.models.user;
             var dbUtil = app.lib.dbUtil;
 

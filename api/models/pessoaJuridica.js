@@ -1,5 +1,5 @@
+const mongoose = require('mongoose');
 module.exports = app => {
-    var mongoose = require('mongoose');
     var Schema = mongoose.Schema;
         
     var pessoaJuridicaSchema = new Schema(
