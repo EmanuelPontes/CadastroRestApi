@@ -1,7 +1,10 @@
 CadastroRestApi
 
 Criar web api com :
-    -autenticação (mediante registro)
+    Aplicação rodando com heroku -> https://cadastro-rest-api.herokuapp.com/
+   
+   
+   -autenticação (mediante registro)
     - formulario de cadastro com os seguinte itens: 
 
         (*) Itens obrigatórios
@@ -34,5 +37,7 @@ Estrutura do projeto será MVC(Model, view and controller)
     Corrigir a tabela de exibição da consulta adaptado para mobile.
     Criar refresh de jwt tokens a medida que eles expiram
     Salvar senhar como hash utilizando o bcrypto
+    
+
 
 
