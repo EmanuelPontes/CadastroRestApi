@@ -7,7 +7,7 @@
     },
     "database": {
         "dbName": "enrollUser",
-        "url": "mongodb://127.0.0.1:27017/",
+        "url": "mongodb+srv://dbCadastro:mki8Me4ks7kZItSa@clustercadastrorestapi.67w9l.mongodb.net/enrollUser?retryWrites=true&w=majority",
         "options": {
             "useUnifiedTopology": true,
             "useNewUrlParser": true,
