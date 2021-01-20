@@ -4,7 +4,7 @@ module.exports = app => {
 
     var controllerFormCadastro = {
         getPage: function(req, res, next) {
-            var jwtCookie = req.cookies["authUser"];
+            var jwtCookie = req.cookies["authToken"];
             const jwtSecret = config.get("jwt.secret");
             var decodedJWT = jwt.verify(jwtCookie, jwtSecret);
 
