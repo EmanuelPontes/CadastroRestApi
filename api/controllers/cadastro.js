@@ -48,9 +48,19 @@ module.exports = app => {
             var PessoaJuridica = app.models.pessoaJuridica;
             var dbUtil = app.lib.dbUtil;
 
+            var dataCheckUtil = require('../lib/dataCheckUtil')(app);
+
+            dataCheckUtil.preventJsInjection(enderecosDto);
+            dataCheckUtil.preventJsInjection(pessoaDto);
+            dataCheckUtil.preventJsInjection(pessoaFisicaDto);
+            dataCheckUtil.preventJsInjection(pessoaJuridicaDto);
+
+
             dbUtil.saveArray(enderecosDto, EnderecoModel).then((enderecosArr) => {
                 
                 pessoaDto = Object.assign(pessoaDto, {enderecos: enderecosArr});
+
+                
 
                 dbUtil.save(pessoaDto, PessoaModel).then((pessoaId) => {
                     var pessoaTipoDadosDto = (pessoaTipoDto === "pj") ? pessoaJuridicaDto : pessoaFisicaDto;
@@ -60,7 +70,7 @@ module.exports = app => {
                     pessoaTipoModel = (pessoaTipoDto === "pj") ? PessoaJuridica : PessoaFisica;
                     
                     dbUtil.save(pessoaTipoDadosDto, pessoaTipoModel).then((pessoaTipoId) => {
-                        res.status(200).send();
+                        res.status(200).redirect('/main');
                     }).catch(
                         (e) => {
                             console.log("falha ao salvar pessoa tipo");

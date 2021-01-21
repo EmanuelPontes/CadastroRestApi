@@ -9,6 +9,29 @@ module.exports = app => {
         post: function(req, res, next) {
 
             var dataObj = req.body;
+            var userModel = app.models.user;
+            var dbUtil = app.lib.dbUtil;
+
+            dbUtil.find({user: dataObj.user}, userModel).then(
+                (foundUserArr) => {
+                    var userAuth = false;
+                    for(foundUserObj of foundUserArr) {
+
+                        if (foundUserObj.user === dataObj.user) {
+                            res.status(400).send("Usuário já cadastrado, tente novamente");
+                            return;
+                        }
+                        
+                    }
+                }
+            ).catch(
+                (e) => {
+                    console.log("falha ao buscar usuario existente");
+                    console.log(e);
+                    res.status(400);
+                    return;
+                }
+            );    
 
             if (dataObj.password === dataObj.confirmPassword) {
                 var hashCost = 12;
@@ -18,8 +41,7 @@ module.exports = app => {
                 return;
             }
 
-            var userModel = app.models.user;
-            var dbUtil = app.lib.dbUtil;
+            
 
 
             dbUtil.save(dataObj, userModel).then((userID) => {
@@ -31,6 +53,7 @@ module.exports = app => {
                     console.log("falha ao salvar novo usuario");
                     console.log(e);
                     res.status(400).send("Falha ao cadastrar novo usuario, tente novamente");
+                    return;
                 }
             );
         }
