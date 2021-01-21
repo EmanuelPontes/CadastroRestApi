@@ -184,6 +184,7 @@
         console.log("envio formulario");
         $('#formCadastro').submit(function(event) {
             event.preventDefault();
+
             var formArray = $('#formCadastro').serializeArray();
             
             var formObj = formToObj(formArray);

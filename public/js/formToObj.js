@@ -15,7 +15,7 @@ function formToObj(serializedArrayFormObj) {
         if(arrItem.includes('[')) {
             var arrayMatch = arrItem.match(/[a-zA-Z0-9_]+|(?=\[\])/g);
             objP[arrayMatch[0]] = [];
-            console.log("é um array")
+            console.log("É um array")
         } else {
             objP[arrItem] = {};
         }   
@@ -31,10 +31,10 @@ function formToObj(serializedArrayFormObj) {
             if (arrItem == key[0]) {
                 
                 if (key[1] === undefined) {
-                    objP[arrItem] = obj['value'];
+                    objP[arrItem] = obj['value'].replace(/</g, "&lt;").replace(/>/g, "&gt;");
                     notAnObj = arrItem;
                 } else {
-                    objTemp[key[1]] = obj['value'];
+                    objTemp[key[1]] = obj['value'].replace(/</g, "&lt;").replace(/>/g, "&gt;");
                 }
                 
                 
@@ -45,7 +45,7 @@ function formToObj(serializedArrayFormObj) {
         if(arrItem.includes('[')) {
             var arrayMatch = arrItem.match(/[a-zA-Z0-9_]+|(?=\[\])/g);
             objP[arrayMatch[0]][parseInt(arrayMatch[1])] = objTemp;
-            console.log("é um array")
+            console.log("É um array")
         } else {
             if (arrItem != notAnObj) {
                 objP[arrItem] = objTemp;
